@@ -1,0 +1,17 @@
+/* GLOBAL */
+
+/* FOOTER */
+
+.footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: gray;
+	border-top: 1px solid lightgray;
+	padding: 10px 20px;
+}
+
+.footer__copyright,
+.footer__contacts {
+	margin: 0;
+}

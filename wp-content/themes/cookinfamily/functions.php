@@ -79,3 +79,38 @@ function cookinfamily_settings_register()
 }
 
 add_action('admin_init', 'cookinfamily_settings_register');
+
+/* Register a new type "Ingrédients" */
+
+function cookinfamily_register_custom_post_types()
+{
+    $labels_ingredient = array(
+        'menu_name'         => __('Ingrédients', 'cookinfamily'),
+        'name_admin_bar'    => __('Ingrédient', 'cookinfamily'),
+        'add_new_item'      => __('Ajouter un nouvel ingrédient', 'cookinfamily'),
+        'new_item'          => __('Nouvel ingrédient', 'cookinfamily'),
+        'edit_item'         => __('Modifier l\'ingrédient', 'cookinfamily'),
+    );
+    $args_ingredient = array(
+        'label'             => __('Ingrédients', 'cookinfamily'),
+        'description'       => __('Ingrédients', 'cookinfamily'),
+        'labels'            => $labels_ingredient,
+        'supports'          => array('title', 'thumbnail', 'excerpt', 'editor'),
+        'hierarchical'      => false,
+        'public'            => true,
+        'show_ui'           => true,
+        'show_in_menu'      => true,
+        'menu_position'     => 40,
+        'show_in_admin_bar' => true,
+        'show_in_nav_menus' => true,
+        'can_export'        => true,
+        'has_archive'       => true,
+        'exclude_from_search'   => false,
+        'publicly_queryable' => true,
+        'capability_type'   => 'post',
+        'menu_icon'  => 'dashicons-drumstick',
+    );
+    register_post_type('cif_ingredient', $args_ingredient);
+}
+
+add_action('init', 'cookinfamily_register_custom_post_types', 11);

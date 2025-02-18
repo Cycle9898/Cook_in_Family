@@ -114,3 +114,64 @@ function cookinfamily_register_custom_post_types()
 }
 
 add_action('init', 'cookinfamily_register_custom_post_types', 11);
+
+/* Taxonomy */
+
+function cookinfamily_register_taxonomies()
+{
+    // "Type de plat"
+    $labels = array(
+        'name'             => __('Type de plat'),
+        'singular_name'    => __('Type de plat'),
+        'search_items'     => __('Rechercher un type de plat'),
+        'all_items'        => __('Tous les types de plats'),
+        'parent_item'      => __('Parent Type de plat'),
+        'parent_item_colon' => __('Parent Type de plat:'),
+        'edit_item'        => __('Modifier un type de plat'),
+        'update_item'      => __('Mettre à jour un type de plat'),
+        'add_new_item'     => __('Ajouter un nouveau type de plat'),
+        'new_item_name'    => __('Nouveau type de plat'),
+        'menu_name'        => __('Type de plat')
+    );
+
+    $args = array(
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'show_in_rest'      => true,
+        'rewrite'           => array('slug' => 'type-de-plat')
+    );
+
+    register_taxonomy('type_de_plat', array('recettes'), $args);
+
+    // "Régime alimentaire"
+    $labels = array(
+        'name'             => __('Régimes alimentaire'),
+        'singular_name'    => __('Régime alimentaire'),
+        'search_items'     => __('Rechercher un régime alimentaire'),
+        'all_items'        => __('Tous les régimes alimentaires'),
+        'parent_item'      => __('Parent Régime alimentaire'),
+        'parent_item_colon' => __('Parent Régime alimentaire:'),
+        'edit_item'        => __('Modifier un régime alimentaire'),
+        'update_item'      => __('Mettre à jour un régime alimentaire'),
+        'add_new_item'     => __('Ajouter un nouveau régime alimentaire'),
+        'new_item_name'    => __('Nouveau régime alimentaire'),
+        'menu_name'        => __('Régime alimentaire')
+    );
+
+    $args = array(
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'show_in_rest'      => true,
+        'rewrite'           => array('slug' => 'regime-alimentaire')
+    );
+
+    register_taxonomy('regime_alimentaire', array('recettes'), $args);
+}
+
+add_action('init', 'cookinfamily_register_taxonomies');

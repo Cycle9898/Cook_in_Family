@@ -1,4 +1,14 @@
 <?php
+/* Enqueue scripts or stylesheets */
+
+function cookinfamily_js_scripts()
+{
+    wp_enqueue_script('cookinfamily', get_template_directory_uri() . '/JS/cookinfamily_homepage.js', array('jquery'), '1.0.0', true);
+    wp_localize_script('cookinfamily', 'cookinfamily_homepage_js', array('ajax_url' => admin_url('admin-ajax.php')));
+}
+
+add_action('wp_enqueue_scripts', 'cookinfamily_js_scripts');
+
 /* Admin page with custom settings */
 
 function cookinfamily_add_admin_page()
@@ -175,3 +185,24 @@ function cookinfamily_register_taxonomies()
 }
 
 add_action('init', 'cookinfamily_register_taxonomies');
+
+/* Ajax queries */
+
+function cookinfamily_request_2_recipes()
+{
+    $args = array('post_type' => 'recettes', 'posts_per_page' => 2);
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        $response = $query;
+    } else {
+        $response = false;
+    }
+
+    wp_send_json($response);
+
+    wp_die();
+}
+
+add_action('wp_ajax_request_2_recipes', 'cookinfamily_request_2_recipes');
+add_action('wp_ajax_nopriv_request_2_recipes', 'cookinfamily_request_2_recipes');

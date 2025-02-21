@@ -12,7 +12,7 @@
 
 /* Sub-menu inside WP parameters */
 
-function administration_add_admin_page()
+function Administration_add_admin_page()
 {
     add_submenu_page(
         'options-general.php',
@@ -24,7 +24,7 @@ function administration_add_admin_page()
     );
 }
 
-function administration_page()
+function Administration_page()
 {
     $colors = array(
         'ffffff' => 'Blanc',
@@ -55,11 +55,11 @@ function administration_page()
 <?php
 }
 
-add_action('admin_menu', 'administration_add_admin_page');
+add_action('admin_menu', 'Administration_add_admin_page');
 
 /* Apply parameters */
 
-function administration_apply_bg_color()
+function Administration_apply_bg_color()
 {
     $bg_color = get_option('bg_color');
 ?>
@@ -71,4 +71,4 @@ function administration_apply_bg_color()
 <?php
 }
 
-add_action('wp_head', 'administration_apply_bg_color');
+add_action('wp_head', 'Administration_apply_bg_color');
